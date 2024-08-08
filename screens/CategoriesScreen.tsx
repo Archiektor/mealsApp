@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {CATEGORIES, Category} from '../data/dummy-data';
 import {Margins} from '../constants/Margins';
 import {Colors} from '../constants/Colors';
@@ -11,16 +11,9 @@ const CategoriesScreen = ({navigation}) => {
         navigation.navigate('MealsOverview', {categoryId: id}); // <- define params obj.
     }
 
+
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.hamburgerContainer}>
-                    <View style={styles.hamburger}/>
-                </View>
-                <View style={styles.headerTextContainer}>
-                    <Text style={styles.headerText}>All Categories</Text>
-                </View>
-            </View>
             <View style={styles.listContainer}>
                 <FlatList<Category>
                     data={CATEGORIES}
@@ -39,7 +32,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         minWidth: '100%',
-        backgroundColor: Colors.primary300,
         //alignItems: 'center',
     },
     header: {

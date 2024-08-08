@@ -1,30 +1,49 @@
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import CategoriesScreen from './screens/CategoriesScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StatusBar} from 'expo-status-bar';
-import {Colors} from './constants/Colors';
-import {NavigationContainer} from '@react-navigation/native'
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import MealsOverviewScreen from './screens/MealsOverviewScreen';
 
-const Stack = createNativeStackNavigator();
+import CategoriesScreen from './screens/CategoriesScreen';
+import MealsOverviewScreen from './screens/MealsOverviewScreen';
+import SingleMealOverviewScreen from './screens/SingleMealOverviewScreen';
+import {Colors} from './constants/Colors';
+
+export type RootStackParamList = {
+    MealsCategories: undefined;
+    MealsOverview: { categoryId: string };
+    SingleMealOverview: { mealId: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
     return (
         <>
-            <StatusBar style="light" backgroundColor={Colors.secondary600}/>
+            <StatusBar style="light" backgroundColor={Colors.secondary800}/>
             <SafeAreaView style={styles.safeArea}>
                 <NavigationContainer>
-                    <Stack.Navigator>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerStyle: {backgroundColor: Colors.secondary400},
+                            headerTintColor: 'white',
+                            contentStyle: {backgroundColor: Colors.primary300},
+                        }}
+                    >
                         <Stack.Screen
-                            name="Categories"
+                            name="MealsCategories"
                             component={CategoriesScreen}
-                            options={{headerShown: false}}
+                            options={{title: 'All Categories'}}
                         />
                         <Stack.Screen
                             name="MealsOverview"
                             component={MealsOverviewScreen}
-                            options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="SingleMealOverview"
+                            component={SingleMealOverviewScreen}
+                            options={{title: 'Meal Details'}}
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
@@ -36,12 +55,5 @@ export default function App() {
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: Colors.secondary600
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 });
