@@ -21,14 +21,14 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
     return (
         <>
-            <StatusBar style="light" backgroundColor={Colors.secondary800}/>
+            <StatusBar style="light" backgroundColor={Colors.secondary600}/>
             <SafeAreaView style={styles.safeArea}>
                 <NavigationContainer>
                     <Stack.Navigator
                         screenOptions={{
-                            headerStyle: {backgroundColor: Colors.secondary400},
+                            headerStyle: {backgroundColor: Colors.secondary600},
                             headerTintColor: 'white',
-                            contentStyle: {backgroundColor: Colors.primary300},
+                            contentStyle: {backgroundColor: Colors.primary400},
                         }}
                     >
                         <Stack.Screen
