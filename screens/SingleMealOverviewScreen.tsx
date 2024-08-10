@@ -1,26 +1,48 @@
-import React, {useLayoutEffect} from 'react';
-import {View, Text, Image, StyleSheet, ScrollView, Button} from 'react-native';
+import React, {useContext, useLayoutEffect} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {MEALS} from '../data/dummy-data';
 import {Colors} from '../constants/Colors';
 import {Margins} from '../constants/Margins';
 import {TextSizes} from '../constants/TextSizes';
 import MealDetails from '../components/MealDetails';
 import IconButton from '../components/IconButton';
+import {FavoritesContext} from '../store/context/favorites-context';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
+import {RouteProp} from '@react-navigation/native';
 
-const SingleMealOverviewScreen = ({navigation, route}) => {
+type SingleMealOverviewScreenProps = {
+    navigation: StackNavigationProp<RootStackParamList, 'SingleMealOverview'>;
+    route: RouteProp<RootStackParamList, 'SingleMealOverview'>;
+};
+
+const SingleMealOverviewScreen = ({navigation, route}: SingleMealOverviewScreenProps) => {
+    const mealId = route.params.mealId;
+    const favoriteMealsCtx = useContext(FavoritesContext);
+
+    const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
     const iconPressHandler = () => {
-        alert('Icon pressed!');
-    }
+        // alert("icon pressed");
+        if (mealIsFavorite) {
+            favoriteMealsCtx.removeFavorite(mealId);
+        } else {
+            favoriteMealsCtx.addFavorite(mealId);
+        }
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <IconButton pressCb={iconPressHandler} nameOfIcon={'star'} color={'#fff'}/>
+                <IconButton
+                    pressCb={iconPressHandler}
+                    nameOfIcon={mealIsFavorite ? 'star' : 'star-outline'}
+                    color={'#fff'}
+                />
             ),
         });
-    }, [navigation, iconPressHandler]);
+    }, [navigation, iconPressHandler, mealIsFavorite]);
 
-    const {mealId} = route.params;
 
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 

@@ -1,21 +1,25 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {CATEGORIES, Category} from '../data/dummy-data';
+import {CATEGORIES, CategoryType} from '../data/dummy-data';
 import {Margins} from '../constants/Margins';
 import {Colors} from '../constants/Colors';
 import CategoryGridTile from '../components/CategoryGridTile';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
 
-const CategoriesScreen = ({navigation}) => {
+type CategoriesScreenProps = {
+    navigation: StackNavigationProp<RootStackParamList, 'MealsCategories'>;
+};
+
+const CategoriesScreen = ({navigation}: CategoriesScreenProps) => {
     const categoryPressHandler = (id: string) => {
-        //console.log(id)
-        navigation.navigate('MealsOverview', {categoryId: id}); // <- define params obj.
-    }
-
+        navigation.navigate('MealsOverview', {categoryId: id});
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.listContainer}>
-                <FlatList<Category>
+                <FlatList<CategoryType>
                     data={CATEGORIES}
                     renderItem={({item}) => (
                         <CategoryGridTile item={item} pressCb={categoryPressHandler}/>
@@ -32,7 +36,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         minWidth: '100%',
-        //alignItems: 'center',
     },
     header: {
         minHeight: 48,
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     listContainer: {
         alignItems: 'center',
         paddingVertical: Margins.m,
-    }
+    },
 });
 
 export default CategoriesScreen;

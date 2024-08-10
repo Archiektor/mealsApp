@@ -1,13 +1,13 @@
 import Category from './models/category';
 import Meal from './models/meal';
 
-export type Category = {
+export type CategoryType = {
     id: string;
     title: string;
     color: string;
 };
 
-export type Meal = {
+export type MealType = {
     id: string;
     categoryIds: string[];
     title: string;
@@ -23,7 +23,7 @@ export type Meal = {
     isLactoseFree: boolean;
 };
 
-export const CATEGORIES: Category[] = [
+export const CATEGORIES: CategoryType[] = [
     new Category('c1', 'Italian', '#f5428d'),
     new Category('c2', 'Quick & Easy', '#f54242'),
     new Category('c3', 'Hamburgers', '#f5a442'),
@@ -36,7 +36,7 @@ export const CATEGORIES: Category[] = [
     new Category('c10', 'Summer', '#47fced')
 ];
 
-export const MEALS: Meal [] = [
+export const MEALS: MealType [] = [
     new Meal(
         'm1',
         ['c1', 'c2'],

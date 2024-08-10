@@ -3,13 +3,13 @@ import {Pressable, Text, View, Image, StyleSheet, Platform} from 'react-native';
 import {Colors} from '../constants/Colors';
 import {Margins} from '../constants/Margins';
 import {TextSizes} from '../constants/TextSizes';
-import {Meal} from '../data/dummy-data';
+import {MealType} from '../data/dummy-data';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 
 type MealItemProps = {
-    mealItem: Meal;
+    mealItem: MealType;
 };
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'SingleMealOverview'>;

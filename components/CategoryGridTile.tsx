@@ -1,11 +1,11 @@
 import {Platform, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Margins} from '../constants/Margins';
-import {Category} from '../data/dummy-data';
+import {CategoryType} from '../data/dummy-data';
 import {Colors} from '../constants/Colors';
 
 type CategoryGridTile = {
-    item: Category,
+    item: CategoryType,
     pressCb: (id: string) => void,
 }
 

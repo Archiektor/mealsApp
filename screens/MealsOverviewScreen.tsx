@@ -2,11 +2,18 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useLayoutEffect} from 'react';
 import {Colors} from '../constants/Colors';
 import {Margins} from '../constants/Margins';
-import {CATEGORIES, Meal, MEALS} from '../data/dummy-data';
+import {CATEGORIES, MealType, MEALS} from '../data/dummy-data';
 import MealItem from '../components/MealItem';
+import {RootStackParamList} from '../App';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
+type MealsOverviewScreenProps = {
+    navigation: StackNavigationProp<RootStackParamList, 'MealsOverview'>;
+    route: RouteProp<RootStackParamList, 'MealsOverview'>;
+};
 
-const MealsOverviewScreen = ({navigation, route}) => {
+const MealsOverviewScreen = ({navigation, route}: MealsOverviewScreenProps) => {
     //const route = useRoute(); // or useHook
     const {categoryId} = route.params;
 
@@ -23,7 +30,7 @@ const MealsOverviewScreen = ({navigation, route}) => {
 
     return (
         <View style={styles.container}>
-            <FlatList<Meal>
+            <FlatList<MealType>
                 data={displayedMeals}
                 renderItem={({item}) => (
                     <MealItem mealItem={item}/>

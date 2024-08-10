@@ -3,11 +3,11 @@ import React from 'react';
 import {Margins} from '../constants/Margins';
 import {Colors} from '../constants/Colors';
 import {TextSizes} from '../constants/TextSizes';
-import {Meal} from '../data/dummy-data';
+import {MealType} from '../data/dummy-data';
 import Subtitle from './Subtitle';
 
 type MealDetails = {
-    selectedMeal: Meal | undefined;
+    selectedMeal: MealType | undefined;
 }
 
 const MealDetails = ({selectedMeal}: MealDetails) => {

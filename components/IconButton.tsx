@@ -2,9 +2,11 @@ import {Pressable, StyleSheet} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import {Colors} from '../constants/Colors';
 
+type IoniconNames = keyof typeof Ionicons.glyphMap;
+
 type IconButton = {
     pressCb: () => void,
-    nameOfIcon: string,
+    nameOfIcon: IoniconNames,
     color: string,
 }
 
