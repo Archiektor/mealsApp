@@ -2,10 +2,12 @@ import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {MEALS} from '../data/dummy-data';
 import React, {useContext} from 'react';
 import {FavoritesContext} from '../store/context/favorites-context';
+import {useSelector} from 'react-redux';
 
 const FavoritesScreen = () => {
-    const favoriteMealsCtx = useContext(FavoritesContext);
-    const displayedMeals = MEALS.filter(meal => favoriteMealsCtx.ids.includes(meal.id));
+    //const favoriteMealsCtx = useContext(FavoritesContext);
+    const favoriteMealsIds = useSelector((state: any) => state.favoriteMeals.ids);
+    const displayedMeals = MEALS.filter(meal => favoriteMealsIds.includes(meal.id));
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>

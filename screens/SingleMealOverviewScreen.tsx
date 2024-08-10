@@ -10,6 +10,8 @@ import {FavoritesContext} from '../store/context/favorites-context';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {RouteProp} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {addFavorite, removeFavorite} from '../store/redux/favorites';
 
 type SingleMealOverviewScreenProps = {
     navigation: StackNavigationProp<RootStackParamList, 'SingleMealOverview'>;
@@ -18,16 +20,18 @@ type SingleMealOverviewScreenProps = {
 
 const SingleMealOverviewScreen = ({navigation, route}: SingleMealOverviewScreenProps) => {
     const mealId = route.params.mealId;
-    const favoriteMealsCtx = useContext(FavoritesContext);
+    //const favoriteMealsCtx = useContext(FavoritesContext);
+    const favoriteMealsIds = useSelector((state: any) => state.favoriteMeals.ids);
+    const dispatch = useDispatch();
 
-    const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+    const mealIsFavorite = favoriteMealsIds.includes(mealId);
 
     const iconPressHandler = () => {
-        // alert("icon pressed");
+        //alert("icon pressed");
         if (mealIsFavorite) {
-            favoriteMealsCtx.removeFavorite(mealId);
+            dispatch(removeFavorite({id: mealId}));
         } else {
-            favoriteMealsCtx.addFavorite(mealId);
+            dispatch(addFavorite({id: mealId}));
         }
     };
 
